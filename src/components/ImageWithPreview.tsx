@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-
+import type { JSX } from 'solid-js';
 import { createEffect, createSignal, Show, splitProps } from 'solid-js';
 
 import type { ImageWithPreviewProps } from '~/shared/types';
@@ -9,8 +8,8 @@ import type { ImageWithPreviewProps } from '~/shared/types';
  * image. When the full image is loaded, the preview image is removed, revealing
  * the full image.
  */
-function ImageWithPreview<T extends React.ElementType = 'img'>(props: ImageWithPreviewProps<T>) {
-  // Splitting props into two groups: 'name' and 'age'
+function ImageWithPreview<T extends JSX.Element = 'img'>(props: ImageWithPreviewProps<T>) {
+  // Splitting props into two groups
   const [baseProps, restProps] = splitProps(props, ['as', 'preview', 'style']);
 
   const [isLoaded, setIsLoaded] = createSignal(false);

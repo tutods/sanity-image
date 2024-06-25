@@ -1,5 +1,3 @@
-import React, { type ComponentPropsWithoutRef, type ElementType, type ReactElement } from 'react';
-
 import type { JSX } from 'solid-js';
 import { splitProps } from 'solid-js';
 import { ImageWithPreview } from 'src/components/ImageWithPreview';
@@ -10,6 +8,12 @@ import { buildSrc, buildSrcSet, buildSvgAttributes } from '~/utils/url-builder';
 export const SanityImage = <C extends JSX.Element = 'img'>(
   props: PolymorphicComponentProps<C, SanityImageProps>,
 ) => {
+  const [baseProps, sanityProps, imgProps, restOfProps] = splitProps(
+    props,
+    ['as'],
+    ['baseUrl', 'crop', 'dataset', 'preview', 'projectId', 'queryParams', 'hotspot', 'mode'],
+    ['height', 'htmlHeight', 'htmlId', 'htmlWidth', 'width', 'id'],
+  );
   /**
    * {
    *   as: component,
@@ -43,51 +47,57 @@ export const SanityImage = <C extends JSX.Element = 'img'>(
    * }
    */
 
-  if (!id) throw new Error('Missing required `id` prop for <SanityImage>.');
-  if (!baseUrl && (!projectId || !dataset))
+  if (!imgProps.id) throw new Error('Missing required `id` prop for <SanityImage>.');
+
+  if (!sanityProps.baseUrl && (!sanityProps.projectId || !sanityProps.dataset)) {
     throw new Error(
       'Missing required `baseUrl` or `projectId` and `dataset` props for <SanityImage>.',
     );
+  }
 
-  baseUrl = baseUrl ?? `https://cdn.sanity.io/images/${projectId}/${dataset}/`;
+  const baseUrl =
+    sanityProps.baseUrl ??
+    `https://cdn.sanity.io/images/${sanityProps.projectId}/${sanityProps.dataset}/`;
 
-  const isSvg = id.endsWith('-svg');
+  const isSvg = imgProps.id.endsWith('-svg');
 
-  const ImageComponent = preview && !isSvg ? ImageWithPreview : component ?? 'img';
+  const ImageComponent = sanityProps.preview && !isSvg ? ImageWithPreview : baseProps.as ?? 'img';
 
-  const componentProps: ComponentPropsWithoutRef<typeof ImageComponent> = {
-    alt: rest.alt ?? '',
-    id: htmlId,
-    loading: rest.loading ?? 'lazy',
-    ...rest,
+  const componentProps: JSX.ImgHTMLAttributes<HTMLImageElement> = {
+    alt: restOfProps.alt ?? '',
+    id: imgProps.htmlId,
+    loading: restOfProps.loading ?? 'lazy',
+    ...restOfProps,
   };
 
   if (isSvg) {
     // Sanity ignores all transformations for SVGs, so we can just render the
     // component without passing a query string and without doing anything for
     // the preview.
-    return <ImageComponent {...buildSvgAttributes({ baseUrl, id })} {...componentProps} />;
+    return (
+      <ImageComponent {...buildSvgAttributes({ baseUrl, id: imgProps.id })} {...componentProps} />
+    );
   }
 
   // Create default src and build srcSet
   const srcParams = {
     baseUrl,
-    crop,
-    height,
-    hotspot,
-    id,
-    mode,
-    queryParams,
-    width,
+    crop: sanityProps.crop,
+    height: imgProps.height,
+    hotspot: sanityProps.hotspot,
+    id: imgProps.id,
+    mode: sanityProps.mode ?? 'contain',
+    queryParams: sanityProps.queryParams,
+    width: imgProps.width,
   };
 
   const { src, ...outputDimensions } = buildSrc(srcParams);
   componentProps.srcSet = buildSrcSet(srcParams).join(', ');
   componentProps.src = src;
-  componentProps.width = htmlWidth ?? outputDimensions.width;
-  componentProps.height = htmlHeight ?? outputDimensions.height;
+  componentProps.width = imgProps.htmlWidth ?? outputDimensions.width;
+  componentProps.height = imgProps.htmlHeight ?? outputDimensions.height;
 
-  if (preview) {
+  if (sanityProps.preview) {
     componentProps.as = component ?? 'img';
     componentProps.preview = preview;
   }

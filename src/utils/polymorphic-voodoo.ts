@@ -10,6 +10,8 @@
 
 // Orig source: https://github.com/emotion-js/emotion/blob/master/packages/styled-base/types/helper.d.ts
 // A more precise version of just React.ComponentPropsWithoutRef on its own
+import type { JSX } from 'solid-js';
+
 export type PropsOf<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   C extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any>,
@@ -36,7 +38,7 @@ export type ExtendableProps<ExtendedProps = object, OverrideProps = object> = Ov
  * props like children, className & style work, as well as element-specific
  * attributes like aria roles. The component (`C`) must be passed in.
  */
-export type InheritableElementProps<C extends React.ElementType, Props = object> = ExtendableProps<
+export type InheritableElementProps<C extends JSX.Element, Props = object> = ExtendableProps<
   PropsOf<C>,
   Props
 >;
@@ -46,6 +48,6 @@ export type InheritableElementProps<C extends React.ElementType, Props = object>
  * the passed in `as` prop will determine which props can be included
  */
 export type PolymorphicComponentProps<
-  C extends React.ElementType,
+  C extends JSX.Element,
   Props = object,
 > = InheritableElementProps<C, Props & AsProp<C>>;

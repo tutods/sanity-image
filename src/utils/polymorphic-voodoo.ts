@@ -10,19 +10,15 @@
 
 // Orig source: https://github.com/emotion-js/emotion/blob/master/packages/styled-base/types/helper.d.ts
 // A more precise version of just React.ComponentPropsWithoutRef on its own
-import type { JSX } from 'solid-js';
+import type { Component, JSX, ValidComponent } from 'solid-js';
 
 export type PropsOf<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   C extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any>,
 > = JSX.LibraryManagedAttributes<C, React.ComponentPropsWithoutRef<C>>;
 
-export type AsProp<C extends React.ElementType> = {
-  /**
-   * By default, the component will render an `<img>` tag. You can override this
-   * by passing a different component or HTML tag name.
-   */
-  as?: C;
+type PolymorphicAttributes<T extends ValidComponent> = {
+  as?: T | keyof JSX.HTMLElementTags;
 };
 
 /**
@@ -48,6 +44,8 @@ export type InheritableElementProps<C extends JSX.Element, Props = object> = Ext
  * the passed in `as` prop will determine which props can be included
  */
 export type PolymorphicComponentProps<
-  C extends JSX.Element,
+  C extends ValidComponent,
   Props = object,
-> = InheritableElementProps<C, Props & AsProp<C>>;
+> = InheritableElementProps<C, Props & PolymorphicAttributes<C>>;
+
+export type { PolymorphicAttributes };

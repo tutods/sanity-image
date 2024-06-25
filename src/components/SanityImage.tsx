@@ -63,7 +63,7 @@ export const SanityImage = <C extends JSX.Element = 'img'>(
 
   const ImageComponent = sanityProps.preview && !isSvg ? ImageWithPreview : baseProps.as ?? 'img';
 
-  const componentProps: JSX.ImgHTMLAttributes<HTMLImageElement> = {
+  const componentProps: JSX.HTMLAttributes<typeof ImageComponent> = {
     alt: restOfProps.alt ?? '',
     id: imgProps.htmlId,
     loading: restOfProps.loading ?? 'lazy',
@@ -98,8 +98,8 @@ export const SanityImage = <C extends JSX.Element = 'img'>(
   componentProps.height = imgProps.htmlHeight ?? outputDimensions.height;
 
   if (sanityProps.preview) {
-    componentProps.as = component ?? 'img';
-    componentProps.preview = preview;
+    componentProps.as = baseProps.as ?? 'img';
+    componentProps.preview = sanityProps.preview;
   }
 
   return <ImageComponent {...componentProps} />;

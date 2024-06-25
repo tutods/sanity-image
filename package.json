@@ -1,9 +1,12 @@
 {
   "name": "sanity-image",
-  "version": "0.1.8",
-  "author": "Corey Ward <corey@hey.com>",
+  "version": "0.0.0",
+  "author": {
+    "name": "Daniel Sousa @TutoDS",
+    "url": "https://github.com/tutods"
+  },
   "license": "MIT",
-  "repository": "https://github.com/coreyward/sanity-image",
+  "repository": "https://github.com/tutods/sanity-image",
   "main": "dist/cjs/index.js",
   "module": "dist/mjs/index.js",
   "types": "dist/index.d.ts",
@@ -17,52 +20,43 @@
   "files": [
     "/dist"
   ],
-  "sideEffects": false,
+  "prettier": "@tutods/prettier-config",
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+    "solid-js": "^1.8.17"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.20.2",
-    "@babel/preset-react": "^7.18.6",
     "@size-limit/preset-small-lib": "^8.2.4",
-    "@testing-library/react": "^14.0.0",
-    "@types/jest": "^29.4.0",
+    "@solidjs/testing-library": "^0.8.8",
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/user-event": "^14.5.2",
+    "@tutods/eslint-config": "^1.17.2",
+    "@tutods/prettier-config": "^0.3.1",
     "@types/node": "^18.13.0",
     "@types/probe-image-size": "^7.2.0",
-    "@types/react": "^18.0.28",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
-    "babel-jest": "^29.5.0",
-    "esbuild": "^0.17.8",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-n": "^15.6.1",
-    "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "jest": "^29.5.0",
-    "jest-environment-jsdom": "^29.5.0",
+    "eslint-plugin-simple-import-sort": "^12.1.0",
+    "eslint-plugin-sort-destructure-keys": "^2.0.0",
+    "eslint-plugin-sort-keys-fix": "^1.1.2",
+    "jsdom": "^24.1.0",
     "prettier": "^2.8.4",
     "probe-image-size": "^7.2.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-test-renderer": "^18.2.0",
     "rimraf": "^4.1.2",
     "size-limit": "^8.2.4",
-    "ts-jest": "^29.1.0",
-    "ts-node": "^10.9.1",
-    "typescript": "^5.0.3"
+    "solid-js": "^1.8.17",
+    "tsup": "^8.1.0",
+    "typescript": "^5.0.3",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^1.6.0"
   },
   "scripts": {
-    "build": "rimraf dist && node ./scripts/build.js && tsc -p tsconfig.build.json",
-    "postbuild": "./scripts/postbuild.sh",
+    "prebuild": "rimraf dist",
+    "build": "tsup",
     "size": "size-limit",
-    "test": "jest",
-    "test:generate-measurements": "yarn build && yarn node tests/buildTestCases.js"
+    "test": "vitest"
   },
   "size-limit": [
     {
@@ -73,5 +67,6 @@
       "path": "dist/mjs/index.js",
       "limit": "3 kB"
     }
-  ]
+  ],
+  "packageManager": "pnpm@9.4.0"
 }

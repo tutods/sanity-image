@@ -50,7 +50,7 @@ original width with a srcSet included (multiplies vary based on original image
 size):
 
 ```tsx
-import { SanityImage } from "sanity-image"
+import { SanityImage } from 'sanity-image';
 
 const YourSweetComponent = ({ image }: ComponentProps) => (
   <SanityImage
@@ -59,13 +59,13 @@ const YourSweetComponent = ({ image }: ComponentProps) => (
     baseUrl="https://cdn.sanity.io/images/abcd1234/production/"
     alt="Demo image"
   />
-)
+);
 ```
 
 **More full-featured example**:
 
 ```tsx
-import { SanityImage } from "sanity-image"
+import { SanityImage } from 'sanity-image';
 
 const YourSweetComponent = ({ image }: ComponentProps) => (
   <SanityImage
@@ -101,9 +101,9 @@ const YourSweetComponent = ({ image }: ComponentProps) => (
     className="big-ol-image"
     sizes="(min-width: 500px) 500px, 100vw"
   />
-)
+);
 
-export default YourSweetComponent
+export default YourSweetComponent;
 ```
 
 That’s the gist. Read on for more. 👇
@@ -121,7 +121,7 @@ How it works at a glance:
   width or height)
 - The `srcSet` widths depend on the size of the output image and the original
   image; there's some logic to avoid wasteful tiny images or giant jumps in size
-  between large entries (see `dynamicMultipliers` in `urlBuilder.ts`)
+  between large entries (see `dynamicMultipliers` in `url-builder.ts`)
 - Values in the `srcSet` are never duplicated and never upscale the image
 - Since we can compute the output dimensions of the image in all cases, the
   `width` and `height` attributes are set automatically to avoid layout shifts
@@ -229,18 +229,15 @@ you an entry point to add any other logic you might need. Here's a TypeScript
 example (for JavaScript, just remove the type annotation after `props`):
 
 ```tsx
-import { SanityImage } from "sanity-image"
+import { SanityImage } from 'sanity-image';
 
-const projectId = process.env.SANITY_PROJECT_ID
-const dataset = process.env.SANITY_DATASET
-const baseUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/`
+const projectId = process.env.SANITY_PROJECT_ID;
+const dataset = process.env.SANITY_DATASET;
+const baseUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/`;
 
 export const Image = (
-  props: Omit<
-    React.ComponentProps<typeof SanityImage>,
-    "baseUrl" | "dataset" | "projectId"
-  >
-) => <SanityImage baseUrl={baseUrl} {...props} />
+  props: Omit<React.ComponentProps<typeof SanityImage>, 'baseUrl' | 'dataset' | 'projectId'>,
+) => <SanityImage baseUrl={baseUrl} {...props} />;
 ```
 
 ### Styling your images
@@ -267,15 +264,15 @@ This produces columns that are 390px at most on desktop:
 ```jsx
 <div
   css={{
-    display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
+    display: 'grid',
+    gridTemplateColumns: 'repeat(3, 1fr)',
     gap: 15,
     maxWidth: 1240,
     paddingInline: 20,
-    marginInline: "auto",
+    marginInline: 'auto',
   }}
 >
-  {["image-a", "image-b", "image-c"].map((imageId) => (
+  {['image-a', 'image-b', 'image-c'].map(imageId => (
     <div key={imageId}>
       <SanityImage
         id={imageId}
@@ -319,7 +316,7 @@ positioning for the image. Here’s an example:
 ```jsx
 <section
   css={{
-    position: "relative",
+    position: 'relative',
     paddingBlock: 100,
   }}
 >
@@ -328,19 +325,19 @@ positioning for the image. Here’s an example:
     baseUrl="..."
     width={1440}
     css={{
-      position: "absolute",
+      position: 'absolute',
       top: 0,
       left: 0,
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-      userSelect: "none",
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      userSelect: 'none',
       zIndex: 1,
     }}
     alt=""
   />
 
-  <div css={{ position: "relative", zIndex: 2 }}>
+  <div css={{ position: 'relative', zIndex: 2 }}>
     <h1>Your big hero copy</h1>
     <LinkButton to="/signup/">Get started</LinkButton>
   </div>

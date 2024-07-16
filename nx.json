@@ -7,8 +7,14 @@
       "conventionalCommits": true
     },
     "changelog": {
-      "workspaceChangelog": {
-        "createRelease": "github"
+      "workspaceChangelog": false,
+      "projectChangelogs": {
+        "createRelease": "github",
+        "renderOptions": {
+          "authors": true,
+          "commitReferences": true,
+          "versionTitleDate": true
+        }
       }
     }
   },

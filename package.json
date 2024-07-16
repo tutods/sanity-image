@@ -1,7 +1,7 @@
 {
   "name": "sanity-image",
   "version": "0.0.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "scripts": {
     "prepare": "lefthook install",

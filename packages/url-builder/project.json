@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "targets": {
     "build": {
-      "outputs": ["{workspaceRoot}/dist/"]
+      "outputs": ["{projectRoot}/dist/"]
     }
   }
 }

@@ -12,7 +12,8 @@
     "lint:staged": "biome lint --no-errors-on-unmatched --staged .",
     "tidy": "biome check --write --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=true --no-errors-on-unmatched .",
     "changeset": "changeset",
-    "version": "changeset version",
+    "version:alpha": "changeset pre enter next",
+    "version:stable": "changeset version",
     "publish": "turbo run build && changeset publish"
   },
   "devDependencies": {

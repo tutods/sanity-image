@@ -1,0 +1,50 @@
+{
+  "name": "@tutods/sanity-url-builder",
+  "version": "0.0.0",
+  "license": "MIT",
+  "description": "Package to generate ",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["/dist"],
+  "keywords": ["sanity", "image", "url"],
+  "author": {
+    "name": "Daniel Sousa @TutoDS",
+    "url": "https://github.com/tutods"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --dev",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^11.1.4",
+    "@types/node": "^20.14.10",
+    "@vitest/coverage-v8": "^2.0.3",
+    "probe-image-size": "^7.2.3",
+    "rimraf": "^6.0.1",
+    "size-limit": "^11.1.4",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.3",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^2.0.3"
+  },
+  "size-limit": [
+    {
+      "path": "dist/cjs/index.js",
+      "limit": "4 kB"
+    },
+    {
+      "path": "dist/mjs/index.js",
+      "limit": "3 kB"
+    }
+  ]
+}

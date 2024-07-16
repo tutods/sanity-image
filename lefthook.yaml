@@ -1,0 +1,21 @@
+colors: true
+
+pre-commit:
+  commands:
+    biome:
+      run: pnpm tidy
+      stage_fixed: true
+
+# pre-push:
+#   commands:
+#     typecheck:
+#       glob: "*.ts"
+#       run: pnpm typecheck
+#     test:
+#       glob: "*.ts"
+#       run: pnpm test:coverage
+
+# commit-msg:
+#   commands:
+#     commitlint:
+#       run: npx --no -- commitlint --edit $1

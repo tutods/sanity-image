@@ -1,0 +1,74 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+  "vcs": {
+    "clientKind": "git",
+    "enabled": true,
+    "useIgnoreFile": true,
+    "defaultBranch": "main"
+  },
+  "files": {
+    "include": [
+      "*.ts",
+      ".idea",
+      ".vscode",
+      "*.tsx",
+      "*.js",
+      "*.jsx",
+      "*.yaml",
+      "*.json",
+      "*.md",
+      "*.mdx",
+      "*.css"
+    ],
+    "ignore": [".git", ".github", ".husky", ".env", ".env.*", "pnpm-lock.yaml", "dist"]
+  },
+  "formatter": {
+    "enabled": true,
+    "formatWithErrors": false,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineEnding": "lf",
+    "lineWidth": 88,
+    "attributePosition": "auto"
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "noUselessConstructor": "error",
+        "noForEach": "off"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": "error",
+        "useHookAtTopLevel": "error",
+        "noUnusedImports": "error"
+      },
+      "style": {
+        "useExportType": "error",
+        "useBlockStatements": "error",
+        "useSingleCaseStatement": "error",
+        "useExponentiationOperator": "off"
+      },
+      "suspicious": {
+        "noConsoleLog": "error",
+        "noDuplicateClassMembers": "error",
+        "noEmptyBlockStatements": "error",
+        "noImportAssign": "error",
+        "useAwait": "off"
+      },
+      "performance": {
+        "recommended": true
+      },
+      "a11y": {
+        "recommended": true
+      },
+      "security": {
+        "recommended": true
+      }
+    }
+  }
+}

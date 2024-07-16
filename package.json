@@ -1,14 +1,20 @@
 {
   "name": "sanity-image",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "prepare": "lefthook install",
+    "format": "biome format --no-errors-on-unmatched .",
+    "format:fix": "biome format --no-errors-on-unmatched --write .",
+    "format:staged": "biome format --no-errors-on-unmatched --staged",
+    "lint": "biome lint --no-errors-on-unmatched .",
+    "lint:fix": "biome lint --write --no-errors-on-unmatched .",
+    "lint:staged": "biome lint --no-errors-on-unmatched --staged .",
+    "tidy": "biome check --write --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=true --no-errors-on-unmatched ."
   },
   "devDependencies": {
-    "prettier": "^3.2.5",
+    "@biomejs/biome": "^1.8.3",
+    "lefthook": "^1.7.2",
     "turbo": "^2.0.6",
     "typescript": "^5.4.5"
   },

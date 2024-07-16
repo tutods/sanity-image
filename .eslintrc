@@ -1,8 +1,0 @@
-{
-  "extends": [
-    "@tutods/eslint-config/typescript",
-    "@tutods/eslint-config/sort-imports",
-    "@tutods/eslint-config/sort-keys",
-    "@tutods/eslint-config/prettier"
-  ]
-}

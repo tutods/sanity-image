@@ -1,72 +1,19 @@
 {
   "name": "sanity-image",
-  "version": "0.0.0",
-  "author": {
-    "name": "Daniel Sousa @TutoDS",
-    "url": "https://github.com/tutods"
-  },
-  "license": "MIT",
-  "repository": "https://github.com/tutods/sanity-image",
-  "main": "dist/cjs/index.js",
-  "module": "dist/mjs/index.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./dist/mjs/index.js",
-      "require": "./dist/cjs/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "files": [
-    "/dist"
-  ],
-  "prettier": "@tutods/prettier-config",
-  "peerDependencies": {
-    "solid-js": "^1.8.17"
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^8.2.4",
-    "@solidjs/testing-library": "^0.8.8",
-    "@testing-library/jest-dom": "^6.4.6",
-    "@testing-library/user-event": "^14.5.2",
-    "@tutods/eslint-config": "^1.17.2",
-    "@tutods/prettier-config": "^0.3.1",
-    "@types/node": "^18.13.0",
-    "@types/probe-image-size": "^7.2.0",
-    "@typescript-eslint/eslint-plugin": "^5.54.1",
-    "@typescript-eslint/parser": "^5.54.1",
-    "eslint": "^8.34.0",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-simple-import-sort": "^12.1.0",
-    "eslint-plugin-sort-destructure-keys": "^2.0.0",
-    "eslint-plugin-sort-keys-fix": "^1.1.2",
-    "jsdom": "^24.1.0",
-    "prettier": "^2.8.4",
-    "probe-image-size": "^7.2.3",
-    "rimraf": "^4.1.2",
-    "size-limit": "^8.2.4",
-    "solid-js": "^1.8.17",
-    "tsup": "^8.1.0",
-    "typescript": "^5.0.3",
-    "vite-tsconfig-paths": "^4.3.2",
-    "vitest": "^1.6.0"
+    "prettier": "^3.2.5",
+    "turbo": "^2.0.6",
+    "typescript": "^5.4.5"
   },
-  "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "tsup",
-    "size": "size-limit",
-    "test": "vitest"
-  },
-  "size-limit": [
-    {
-      "path": "dist/cjs/index.js",
-      "limit": "4 kB"
-    },
-    {
-      "path": "dist/mjs/index.js",
-      "limit": "3 kB"
-    }
-  ],
-  "packageManager": "pnpm@9.4.0"
+  "packageManager": "pnpm@8.15.6",
+  "engines": {
+    "node": ">=18"
+  }
 }

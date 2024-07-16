@@ -2,7 +2,7 @@ colors: true
 
 pre-commit:
   commands:
-    biome:
+    format-and-lint:
       glob: "*.{ts,js,md,mdx,json,yaml}"
       run: pnpm tidy
       stage_fixed: true

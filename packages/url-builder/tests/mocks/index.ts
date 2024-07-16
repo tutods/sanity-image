@@ -1,1 +1,1 @@
-export * from './sanity-image'
+export * from "./sanity-image";

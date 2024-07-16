@@ -1,24 +1,24 @@
-import type { ImageQueryParams } from '@/types';
-import { buildQueryParams } from '@/utils/helpers';
-import { mockSanityImage } from '@tests/mocks';
+import type { ImageQueryParams } from "@/types";
+import { buildQueryParams } from "@/utils/helpers";
+import { mockSanityImage } from "@tests/mocks";
 
-describe('# Build query params', () => {
-  it('should works with defaults values', () => {
+describe("# Build query params", () => {
+  it("should works with defaults values", () => {
     expect(
       buildQueryParams({
         id: mockSanityImage.asset._id,
       }),
-    ).toEqual(<ImageQueryParams>{ w: 500, fit: 'max', q: 75, auto: 'format' });
+    ).toEqual(<ImageQueryParams>{ w: 500, fit: "max", q: 75, auto: "format" });
   });
 
-  describe('## Contain mode', () => {
-    it('should converts height to width', () => {
+  describe("## Contain mode", () => {
+    it("should converts height to width", () => {
       expect(
         buildQueryParams({
           id: mockSanityImage.asset._id,
           height: 500,
         }),
-      ).toEqual(<ImageQueryParams>{ w: 500, fit: 'max', q: 75, auto: 'format' });
+      ).toEqual(<ImageQueryParams>{ w: 500, fit: "max", q: 75, auto: "format" });
     });
 
     it("shouldn't upscale", () => {
@@ -29,9 +29,9 @@ describe('# Build query params', () => {
         }),
       ).toEqual(<ImageQueryParams>{
         w: 1000,
-        fit: 'max',
+        fit: "max",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
 
       expect(
@@ -41,9 +41,9 @@ describe('# Build query params', () => {
         }),
       ).toEqual(<ImageQueryParams>{
         w: 1000,
-        fit: 'max',
+        fit: "max",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
     });
 
@@ -55,15 +55,15 @@ describe('# Build query params', () => {
           width: 2000,
         }),
       ).toEqual(<ImageQueryParams>{
-        rect: '0,0,750,750',
+        rect: "0,0,750,750",
         w: 750,
-        fit: 'max',
+        fit: "max",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
     });
 
-    it('should applies rect correctly', () => {
+    it("should applies rect correctly", () => {
       expect(
         buildQueryParams({
           id: mockSanityImage.asset._id,
@@ -71,15 +71,15 @@ describe('# Build query params', () => {
           width: 375,
         }),
       ).toEqual(<ImageQueryParams>{
-        rect: '0,0,750,750',
+        rect: "0,0,750,750",
         w: 375,
-        fit: 'max',
+        fit: "max",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
     });
 
-    it('should removes height param while respecting its constraint', () => {
+    it("should removes height param while respecting its constraint", () => {
       expect(
         buildQueryParams({
           id: mockSanityImage.asset._id,
@@ -88,9 +88,9 @@ describe('# Build query params', () => {
         }),
       ).toEqual(<ImageQueryParams>{
         w: 500, // width adjusted to respect `height` constraint at source aspect ratio
-        fit: 'max',
+        fit: "max",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
 
       expect(
@@ -101,31 +101,31 @@ describe('# Build query params', () => {
           height: 500,
         }),
       ).toEqual(<ImageQueryParams>{
-        rect: '0,0,750,750',
+        rect: "0,0,750,750",
         w: 500,
-        fit: 'max',
+        fit: "max",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
     });
   });
 
-  describe('## Cover mode', () => {
-    it('should returns correct params', () => {
+  describe("## Cover mode", () => {
+    it("should returns correct params", () => {
       expect(
         buildQueryParams({
           id: mockSanityImage.asset._id,
           width: 200,
           height: 375,
-          mode: 'cover',
+          mode: "cover",
         }),
       ).toEqual(<ImageQueryParams>{
-        crop: 'entropy',
+        crop: "entropy",
         w: 200,
         h: 375,
-        fit: 'crop',
+        fit: "crop",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
     });
 
@@ -136,16 +136,16 @@ describe('# Build query params', () => {
           crop: mockSanityImage.crop,
           width: 2000,
           height: 1000,
-          mode: 'cover',
+          mode: "cover",
         }),
       ).toEqual(<ImageQueryParams>{
-        crop: 'entropy',
-        rect: '0,0,750,750',
+        crop: "entropy",
+        rect: "0,0,750,750",
         w: 750,
         h: 375,
-        fit: 'crop',
+        fit: "crop",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
 
       expect(
@@ -154,16 +154,16 @@ describe('# Build query params', () => {
           crop: mockSanityImage.crop,
           width: 1000,
           height: 2000,
-          mode: 'cover',
+          mode: "cover",
         }),
       ).toEqual(<ImageQueryParams>{
-        crop: 'entropy',
-        rect: '0,0,750,750',
+        crop: "entropy",
+        rect: "0,0,750,750",
         w: 375,
         h: 750,
-        fit: 'crop',
+        fit: "crop",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
 
       expect(
@@ -171,79 +171,79 @@ describe('# Build query params', () => {
           id: mockSanityImage.asset._id,
           width: 1000,
           height: 2000,
-          mode: 'cover',
+          mode: "cover",
         }),
       ).toEqual(<ImageQueryParams>{
-        crop: 'entropy',
+        crop: "entropy",
         w: 500,
         h: 1000,
-        fit: 'crop',
+        fit: "crop",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
     });
 
-    it('should applies hotspot', () => {
+    it("should applies hotspot", () => {
       expect(
         buildQueryParams({
           id: mockSanityImage.asset._id,
           width: 375,
           height: 100,
-          mode: 'cover',
+          mode: "cover",
           hotspot: mockSanityImage.hotspot,
         }),
       ).toEqual(<ImageQueryParams>{
-        'fp-x': 0.25,
-        'fp-y': 0.25,
+        "fp-x": 0.25,
+        "fp-y": 0.25,
         w: 375,
         h: 100,
-        fit: 'crop',
+        fit: "crop",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
     });
 
-    it('should hotspot compensates for crop input', () => {
+    it("should hotspot compensates for crop input", () => {
       expect(
         buildQueryParams({
           id: mockSanityImage.asset._id,
           crop: mockSanityImage.crop,
           width: 375,
           height: 100,
-          mode: 'cover',
+          mode: "cover",
           hotspot: mockSanityImage.hotspot,
         }),
       ).toEqual(<ImageQueryParams>{
-        rect: '0,0,750,750',
-        'fp-x': 0.333,
-        'fp-y': 0.333,
+        rect: "0,0,750,750",
+        "fp-x": 0.333,
+        "fp-y": 0.333,
         w: 375,
         h: 100,
-        fit: 'crop',
+        fit: "crop",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
     });
 
-    it('should tolerates out-of-bounds focal points', () => {
+    it("should tolerates out-of-bounds focal points", () => {
       expect(
         buildQueryParams({
           id: mockSanityImage.asset._id,
           crop: { top: 0, bottom: 0.2, left: 0.3, right: 0 },
           width: 500,
           height: 1000,
-          mode: 'cover',
+          mode: "cover",
           hotspot: { x: 1, y: 1 },
         }),
       ).toEqual(<ImageQueryParams>{
-        rect: '300,0,700,800',
-        'fp-x': 1,
-        'fp-y': 1,
+        rect: "300,0,700,800",
+        "fp-x": 1,
+        "fp-y": 1,
         w: 400,
         h: 800,
-        fit: 'crop',
+        fit: "crop",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
 
       expect(
@@ -252,68 +252,68 @@ describe('# Build query params', () => {
           crop: { top: 0, bottom: 0.2, left: 0.3, right: 0 },
           width: 200,
           height: 400,
-          mode: 'cover',
+          mode: "cover",
           hotspot: { x: 1, y: 1 },
         }),
       ).toEqual(<ImageQueryParams>{
-        rect: '300,0,700,800',
-        'fp-x': 1,
-        'fp-y': 1,
+        rect: "300,0,700,800",
+        "fp-x": 1,
+        "fp-y": 1,
         w: 200,
         h: 400,
-        fit: 'crop',
+        fit: "crop",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
     });
 
-    it('should uses entropy crop if no hotspot', () => {
+    it("should uses entropy crop if no hotspot", () => {
       expect(
         buildQueryParams({
           id: mockSanityImage.asset._id,
           crop: mockSanityImage.crop,
           width: 375,
           height: 100,
-          mode: 'cover',
+          mode: "cover",
         }),
       ).toEqual(<ImageQueryParams>{
-        rect: '0,0,750,750',
+        rect: "0,0,750,750",
         w: 375,
         h: 100,
-        fit: 'crop',
-        crop: 'entropy',
+        fit: "crop",
+        crop: "entropy",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
     });
 
-    it('should falls back to max if not changing aspect ratio', () => {
+    it("should falls back to max if not changing aspect ratio", () => {
       expect(
         buildQueryParams({
           id: mockSanityImage.asset._id,
           crop: mockSanityImage.crop,
           width: 500,
           height: 500,
-          mode: 'cover',
+          mode: "cover",
         }),
       ).toEqual(<ImageQueryParams>{
-        rect: '0,0,750,750',
+        rect: "0,0,750,750",
         w: 500,
-        fit: 'max',
+        fit: "max",
         q: 75,
-        auto: 'format',
+        auto: "format",
       });
     });
   });
 
-  describe('## Metadata', () => {
-    it('should returns dimensions', () => {
+  describe("## Metadata", () => {
+    it("should returns dimensions", () => {
       expect(
         buildQueryParams({
           id: mockSanityImage.asset._id,
           options: { includeMetadata: true },
         }).metadata,
-      ).toEqual(<ImageQueryParams['metadata']>{
+      ).toEqual(<ImageQueryParams["metadata"]>{
         sourceDimensions: { width: 1000, height: 1000, aspectRatio: 1 },
         outputDimensions: { width: 500, height: 500, aspectRatio: 1 },
       });
@@ -324,10 +324,10 @@ describe('# Build query params', () => {
           crop: mockSanityImage.crop,
           width: 2000,
           height: 1000,
-          mode: 'cover',
+          mode: "cover",
           options: { includeMetadata: true },
         }).metadata,
-      ).toEqual(<ImageQueryParams['metadata']>{
+      ).toEqual(<ImageQueryParams["metadata"]>{
         sourceDimensions: { width: 1000, height: 1000, aspectRatio: 1 },
         outputDimensions: { width: 750, height: 375, aspectRatio: 2 },
       });
@@ -338,10 +338,10 @@ describe('# Build query params', () => {
           crop: mockSanityImage.crop,
           width: 2000,
           height: 1000,
-          mode: 'contain',
+          mode: "contain",
           options: { includeMetadata: true },
         }).metadata,
-      ).toEqual(<ImageQueryParams['metadata']>{
+      ).toEqual(<ImageQueryParams["metadata"]>{
         sourceDimensions: { width: 1000, height: 1000, aspectRatio: 1 },
         outputDimensions: { width: 750, height: 750, aspectRatio: 1 },
       });
@@ -352,34 +352,34 @@ describe('# Build query params', () => {
           crop: mockSanityImage.crop,
           width: 2000,
           height: 500,
-          mode: 'contain',
+          mode: "contain",
           options: { includeMetadata: true },
         }).metadata,
-      ).toEqual(<ImageQueryParams['metadata']>{
+      ).toEqual(<ImageQueryParams["metadata"]>{
         sourceDimensions: { width: 1000, height: 1000, aspectRatio: 1 },
         outputDimensions: { width: 500, height: 500, aspectRatio: 1 },
       });
     });
   });
 
-  describe('## Query params', () => {
-    it('only uses auto format if no format is specified', () => {
+  describe("## Query params", () => {
+    it("only uses auto format if no format is specified", () => {
       expect(
         buildQueryParams({
           id: mockSanityImage.asset._id,
-          queryParams: { fm: 'webp' },
+          queryParams: { fm: "webp" },
         }).auto,
       ).toEqual(undefined);
     });
 
-    it('passes through valid query params', () => {
+    it("passes through valid query params", () => {
       expect(
         buildQueryParams({
           id: mockSanityImage.asset._id,
           queryParams: {
             blur: 20,
-            flip: 'hv',
-            fm: 'webp',
+            flip: "hv",
+            fm: "webp",
             q: 20,
             sat: -100,
             sharpen: 42,
@@ -387,9 +387,9 @@ describe('# Build query params', () => {
         }),
       ).toEqual(<ImageQueryParams>{
         blur: 20,
-        fit: 'max',
-        flip: 'hv',
-        fm: 'webp',
+        fit: "max",
+        flip: "hv",
+        fm: "webp",
         q: 20,
         sat: -100,
         sharpen: 42,

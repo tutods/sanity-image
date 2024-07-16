@@ -1,6 +1,6 @@
 const mockSanityImage = {
   asset: {
-    _id: 'image-79f37b3f070b144d45455d514ff4e9fc43035649-1000x1000-png',
+    _id: "image-79f37b3f070b144d45455d514ff4e9fc43035649-1000x1000-png",
   },
   crop: {
     top: 0,

@@ -1,7 +1,7 @@
-import type { ImageQueryInputs, ImageQueryParams } from '@/types';
-import { buildRect } from './build-rect';
-import { croppedImageSize } from './cropped-image-size';
-import { parseImageId } from './parse-id';
+import type { ImageQueryInputs, ImageQueryParams } from "@/types";
+import { buildRect } from "./build-rect";
+import { croppedImageSize } from "./cropped-image-size";
+import { parseImageId } from "./parse-id";
 
 const clamp = (value: number, min: number, max: number): number =>
   Math.max(min, Math.min(max, value));
@@ -14,7 +14,7 @@ const roundWithPrecision = (value: number, precision: number): number =>
  */
 const buildQueryParams = ({
   id,
-  mode = 'contain',
+  mode = "contain",
   width,
   height,
   hotspot,
@@ -54,9 +54,9 @@ const buildQueryParams = ({
   // the requested aspect ratio matches the source aspect ratio. In these cases
   // the result will be the same as `contain` mode anyways, and `contain` mode
   // is simpler and saves a few bytes in the URL.
-  if (mode === 'cover' && (!width || !height || width / height === sourceAspectRatio)) {
-    mode = 'contain';
-  } else if (mode === 'contain' && height) {
+  if (mode === "cover" && (!width || !height || width / height === sourceAspectRatio)) {
+    mode = "contain";
+  } else if (mode === "contain" && height) {
     // Similarly, if `contain` mode is used and a height is provided, we can
     // convert it into a width by adjusting the width such that the
     // aspect-ratio–constrained result will respect the height provided.
@@ -91,7 +91,7 @@ const buildQueryParams = ({
 
   // If an explicit format has not been requested, use auto format
   if (!params.fm) {
-    params.auto = 'format';
+    params.auto = "format";
   }
 
   if (crop) {
@@ -99,8 +99,8 @@ const buildQueryParams = ({
     params.rect = buildRect(sourceDimensions, crop);
   }
 
-  if (mode === 'cover') {
-    params.fit = 'crop';
+  if (mode === "cover") {
+    params.fit = "crop";
 
     if (height) {
       params.h = height;
@@ -112,21 +112,21 @@ const buildQueryParams = ({
       const x = crop ? hotspot.x / (1 - crop.left - crop.right) : hotspot.x;
       const y = crop ? hotspot.y / (1 - crop.top - crop.bottom) : hotspot.y;
 
-      params['fp-x'] = roundWithPrecision(clamp(x, 0, 1), 3);
-      params['fp-y'] = roundWithPrecision(clamp(y, 0, 1), 3);
+      params["fp-x"] = roundWithPrecision(clamp(x, 0, 1), 3);
+      params["fp-y"] = roundWithPrecision(clamp(y, 0, 1), 3);
     } else {
       // If no hotspot is provided, use Sanity’s `entropy` crop mode
-      params.crop = 'entropy';
+      params.crop = "entropy";
     }
   } else {
-    params.fit = 'max';
+    params.fit = "max";
   }
 
   if (includeMetadata) {
     // Height will be set if the aspect ratio varies from `sourceAspectRatio`
     const outputHeight = height || Math.round(width / sourceAspectRatio);
 
-    params.metadata = <ImageQueryParams['metadata']>{
+    params.metadata = <ImageQueryParams["metadata"]>{
       sourceDimensions,
       outputDimensions: {
         width,

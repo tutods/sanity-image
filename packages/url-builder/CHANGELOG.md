@@ -1,5 +1,11 @@
 # @tutods/sanity-url-builder
 
+## 1.0.2
+
+### Patch Changes
+
+- docs: add readme
+
 ## 1.0.1
 
 ### Patch Changes

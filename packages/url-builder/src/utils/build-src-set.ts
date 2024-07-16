@@ -6,6 +6,10 @@ import {
   imageIdToUrlPath,
 } from "./helpers";
 
+/**
+ * Callback function to generate `srcSet` image property.
+ * @returns `srcSet` to be used on any `<img>` element.
+ */
 const buildSrcSet = ({
   id,
   mode = "contain",

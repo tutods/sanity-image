@@ -2,8 +2,7 @@ import { buildSrc } from "@/utils";
 import { mockSanityImage } from "@tests/mocks";
 
 describe("# Build image source", () => {
-  // Returns metadata as well as single `src` url
-  it("builds a src with metadata", () => {
+  it("should builds a src with metadata", () => {
     expect(
       buildSrc({ id: mockSanityImage.asset._id, width: 500, baseUrl: "/images/" }),
     ).toEqual({

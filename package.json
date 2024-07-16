@@ -6,6 +6,7 @@
   "scripts": {
     "prepare": "lefthook install",
     "release": "nx release",
+    "prerelease": "nx release prerelease",
     "build": "nx run-many -t build",
     "format": "biome format --no-errors-on-unmatched .",
     "format:fix": "biome format --no-errors-on-unmatched --write .",

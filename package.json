@@ -5,24 +5,27 @@
   "type": "module",
   "scripts": {
     "prepare": "lefthook install",
+    "release": "nx release",
     "format": "biome format --no-errors-on-unmatched .",
     "format:fix": "biome format --no-errors-on-unmatched --write .",
     "format:staged": "biome format --no-errors-on-unmatched --staged",
     "lint": "biome lint --no-errors-on-unmatched .",
     "lint:fix": "biome lint --write --no-errors-on-unmatched .",
     "lint:staged": "biome lint --no-errors-on-unmatched --staged .",
-    "tidy": "biome check --write --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=true --no-errors-on-unmatched .",
-    "release": "standard-version",
-    "release:alpha": "standard-version --prerelease beta"
+    "tidy": "biome check --write --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=true --no-errors-on-unmatched ."
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
     "@changesets/cli": "^2.27.7",
     "@commitlint/cli": "^19.3.0",
     "@commitlint/config-conventional": "^19.2.2",
+    "@nx/js": "19.4.3",
+    "@swc-node/register": "~1.9.1",
+    "@swc/core": "~1.5.7",
+    "@swc/helpers": "~0.5.11",
     "lefthook": "^1.7.2",
-    "standard-version": "^9.5.0",
-    "turbo": "^2.0.6",
+    "nx": "19.4.3",
+    "prettier": "^2.6.2",
     "typescript": "^5.5.3"
   },
   "packageManager": "pnpm@8.15.6",

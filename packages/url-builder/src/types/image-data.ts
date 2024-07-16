@@ -1,3 +1,6 @@
+/**
+ * Image cropping information
+ */
 type CropData = {
   bottom: number;
   left: number;

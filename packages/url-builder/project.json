@@ -1,6 +1,6 @@
 {
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "name": "@tutods/sanity-url-builder",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "targets": {
     "build": {
       "outputs": ["{workspaceRoot}/dist/"]

@@ -10,13 +10,17 @@
     "lint": "biome lint --no-errors-on-unmatched .",
     "lint:fix": "biome lint --write --no-errors-on-unmatched .",
     "lint:staged": "biome lint --no-errors-on-unmatched --staged .",
-    "tidy": "biome check --write --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=true --no-errors-on-unmatched ."
+    "tidy": "biome check --write --formatter-enabled=true --linter-enabled=true --organize-imports-enabled=true --no-errors-on-unmatched .",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "publish": "turbo run build && changeset publish"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
+    "@changesets/cli": "^2.27.7",
     "lefthook": "^1.7.2",
     "turbo": "^2.0.6",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.3"
   },
   "packageManager": "pnpm@8.15.6",
   "engines": {

@@ -6,7 +6,7 @@ import {
   imageIdToUrlPath,
 } from "./helpers";
 
-export const buildSrcSet = ({
+const buildSrcSet = ({
   id,
   mode = "contain",
   width,
@@ -49,3 +49,5 @@ export const buildSrcSet = ({
 
   return Array.from(new Set(srcSetEntries));
 };
+
+export { buildSrcSet };

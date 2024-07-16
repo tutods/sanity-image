@@ -4,10 +4,7 @@ import { buildQueryParams, buildQueryString, imageIdToUrlPath } from "./helpers"
 /**
  * Convert ImageSrcInputs into a full image URL and computed output dimensions.
  */
-export const buildSrc = ({
-  baseUrl,
-  ...inputParams
-}: ImageSrcInputs): ComputedImageData => {
+const buildSrc = ({ baseUrl, ...inputParams }: ImageSrcInputs): ComputedImageData => {
   const { metadata, ...queryParams } = buildQueryParams({
     ...inputParams,
     options: { includeMetadata: true },
@@ -26,3 +23,5 @@ export const buildSrc = ({
     height: metadata.outputDimensions.height,
   };
 };
+
+export { buildSrc };

@@ -16,8 +16,7 @@ const buildSrc = ({ baseUrl, ...inputParams }: ImageSrcInputs): ComputedImageDat
   }
 
   const imageUrl = `${baseUrl}${imageIdToUrlPath(inputParams.id)}`;
-  // biome-ignore lint/suspicious/noConsoleLog: <explanation>
-  console.log("TEST!");
+
   return {
     src: `${imageUrl}?${buildQueryString(queryParams)}`,
     width: metadata.outputDimensions.width,

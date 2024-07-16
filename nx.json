@@ -5,6 +5,18 @@
     "projects": ["*"],
     "version": {
       "conventionalCommits": true
+    },
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
+    }
+  },
+  "targetDefaults": {
+    "build": {
+      "inputs": ["{projectRoot}/**/*"],
+      "dependsOn": ["^build"],
+      "outputs": ["{projectRoot}/dist"]
     }
   }
 }
